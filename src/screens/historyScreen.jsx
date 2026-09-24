@@ -21,6 +21,7 @@ export default function HistoryScreen() {
   const navigate = (name) => {
     const routes = {
       Home: "/home",
+      Map: "/map",
       Search: "/search",
       Categories: "/categories",
       Profile: "/profile",

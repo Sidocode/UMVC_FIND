@@ -46,6 +46,7 @@ export default function SearchScreen() {
     router.canGoBack() ? router.back() : router.replace("/home");
   };
   const navigate = (name) => {
+    if (name === "Map") return openMainScreen(router, "/map");
     if (name === "Home") {
       Keyboard.dismiss();
       openMainScreen(router, "/home");

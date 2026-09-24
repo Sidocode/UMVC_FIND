@@ -24,6 +24,7 @@ export default function ProfileScreen() {
   });
   // Navigation and UI-only Sign Out
   const navigate = (name) => {
+    if (name === "Map") return openMainScreen(router, "/map");
     if (name === "Home") openMainScreen(router, "/home");
     else if (name === "Search") openMainScreen(router, "/search");
     else if (name === "Categories") openMainScreen(router, "/categories");

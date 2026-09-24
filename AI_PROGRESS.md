@@ -1,6 +1,6 @@
 # AI Progress / Project Handoff
 
-Last updated: 2026-09-20.
+Last updated: 2026-09-25.
 Workspace: `C:\Users\sidra\OneDrive\Documents\VSCODE\UMTVC-Find` (Windows / PowerShell).
 This document describes the current state and replaces earlier contradictory progress entries.
 
@@ -47,6 +47,15 @@ Not started:
 - Backend, APIs, database, production icons/splash setup, deployment.
 
 ## 3. CURRENT TASK
+
+Asset rename: user replaced B1.svg with assets/backgrounds/building.svg. Updated BuildingSheet import and style placement comment. Replacement retains 399x721 viewBox; layout unchanged. Import existence and component syntax verified. Earlier B1.svg references below are historical.
+
+
+2026-09-25 building panel: user approved analysis of Figma 833:1416. Map building button now mounts reusable BuildingSheet, animated slide/fade open and close with outside-tap/Android Back dismissal. Uses supplied assets/backgrounds/B1.svg (399x721) and room.svg (82x160), no new downloads. BuildingFloor keeps floor label fixed above its own horizontal FlatList; BuildingRoom renders dynamic name/type over room SVG. data/buildings.js supplies three floors (3,2,1), seven uniquely keyed sample rooms each. Vertical ScrollView keeps Floor 1 accessible on smaller phones. Separate labeled buildingSheet.styles.js. B1 artwork supports exactly three floor rows with 206px spacing; another building silhouette/floor count needs a matching layout. No room detail destination or backend added. 61 source files parsed; 21 unique room records verified. Android export passed (1,487 modules, exit 0); device animation, floor alignment and nested scroll testing remain unverified.
+
+
+2026-09-25: Added Campus Map UI from Figma node 825:682 after design-context inspection. New /map route, mapScreen.jsx, mapScreen.styles.js, reusable MapLegend.jsx and mapCategories.js. Downloaded only map-filter.svg, map-pin.svg and map-current-location.svg; pin uses currentColor for category variants. Reuses existing BottomNavigation. Home CTA and Map tabs on Home/Search/Categories/Profile/History route through openMainScreen; Map uses fade. Reference canvas is blank with temporary blue building button: preserved that layout. Filter opens category choices and filters the temporary academic building button. GPS and building details display honest unavailable notices; no actual geographic map, permission request or live navigation added. Off-canvas building illustration in Figma remains unimplemented. All 56 source files parsed; Android export passed (1,480 modules, exit 0) after rerunning outside the sandbox for Hermes compiler access. Phone visual testing remains necessary. Existing notification detail issue is outside this change.
+
 
 Navigation simplification Android export passed (exit 0). Device animation, keyboard, and Back-button checks remain pending; build success does not verify visual smoothness.
 
@@ -279,3 +288,5 @@ Environment:
 ## 11. CONTINUATION INSTRUCTION
 
 Read AI_PROGRESS.md first. Inspect the existing project before making changes. Continue from visual verification of the restored example cards and current layouts. Preserve working functionality and user preferences, avoid redoing completed work, and update AI_PROGRESS.md again before ending your session.
+
+

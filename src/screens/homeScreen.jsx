@@ -86,6 +86,7 @@ export default function HomeScreen() {
     HomeBold: require("../../assets/fonts/afacad-flux-latin-700-normal.ttf"),
   });
   const navigate = (name) => {
+    if (name === "Map") return openMainScreen(router, "/map", true);
     if (name === "Home") scrollRef.current?.scrollTo({ y: 0, animated: true });
     else if (name === "Search") {
       Keyboard.dismiss();
@@ -249,7 +250,7 @@ export default function HomeScreen() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel="Explore Campus Map"
-            onPress={() => unavailable("Campus Map")}
+            onPress={() => navigate("Map")}
             style={({ pressed }) => [
               styles.mapButton,
               pressed && styles.pressed,

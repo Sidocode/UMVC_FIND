@@ -30,6 +30,7 @@ export default function CategoriesScreen() {
   const goBack = () =>
     router.canGoBack() ? router.back() : router.replace("/home");
   const navigate = (name) => {
+    if (name === "Map") return openMainScreen(router, "/map");
     if (name === "Home") openMainScreen(router, "/home");
     else if (name === "Search") openMainScreen(router, "/search");
     else if (name === "Categories")
