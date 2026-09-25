@@ -10,6 +10,7 @@ export const buildings = [
         id: `building-1-${number}-${index + 1}`,
         name: `Room ${number}0${index + 1}`,
         type: "classroom",
+        description: `A standard room for lectures on floor ${number} of Building 1.`,
       })),
     })),
   },

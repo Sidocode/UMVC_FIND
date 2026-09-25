@@ -13,11 +13,15 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Building from "../../assets/backgrounds/building.svg";
 import BuildingFloor from "./BuildingFloor";
+import RoomDetailsModal from "./RoomDetailsModal";
 import { styles } from "../styles/buildingSheet.styles";
 
 export default function BuildingSheet({ building, onClosed }) {
   const progress = useRef(new Animated.Value(0)).current;
   const [closing, setClosing] = useState(false);
+  const [selectedRoom, setSelectedRoom] = useState(null);
+  // Back dismisses the topmost layer without unmounting the building.
+  const closeTopLayer = () => selectedRoom ? setSelectedRoom(null) : setClosing(true);
   const { height } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const callback = useRef(onClosed);
@@ -46,7 +50,7 @@ export default function BuildingSheet({ building, onClosed }) {
       visible
       animationType="none"
       statusBarTranslucent
-      onRequestClose={() => setClosing(true)}
+      onRequestClose={closeTopLayer}
     >
       <View style={styles.overlay}>
         {/* Dimmed Map / Outside Tap to Close */}
@@ -55,11 +59,14 @@ export default function BuildingSheet({ building, onClosed }) {
             style={styles.outside}
             accessibilityRole="button"
             accessibilityLabel="Close building"
-            onPress={() => setClosing(true)}
+            onPress={closeTopLayer}
           />
         </Animated.View>
         <Animated.View
           accessibilityViewIsModal
+          pointerEvents={selectedRoom ? "none" : "auto"}
+          accessibilityElementsHidden={Boolean(selectedRoom)}
+          importantForAccessibility={selectedRoom ? "no-hide-descendants" : "auto"}
           style={[
             styles.sheet,
             {
@@ -101,12 +108,15 @@ export default function BuildingSheet({ building, onClosed }) {
                     key={floor.id}
                     floor={floor}
                     fontLoaded={loaded}
+                    onRoomSelect={setSelectedRoom}
                   />
                 ))}
               </View>
             </View>
           </ScrollView>
         </Animated.View>
+        {/* Keep the building mounted so all scroll positions survive dismissal. */}
+        {selectedRoom && <RoomDetailsModal room={selectedRoom} onClose={() => setSelectedRoom(null)} />}
       </View>
     </Modal>
   );

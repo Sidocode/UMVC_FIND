@@ -48,6 +48,30 @@ Not started:
 
 ## 3. CURRENT TASK
 
+Building photo is now fixed/display-only per user: removed remove/restore controls, render original building.image, and preserve it explicitly on Save. No photo editing or upload. Component syntax and absence of photo mutation controls verified.
+
+
+Admin popup arrows: reused existing proceed-arrow.svg without modifying the asset. Shared EditorSelect (building dropdowns and room type) and floor accordion use gray arrows, down when closed/up when expanded. Manage Floors and Rooms uses the red right-facing arrow. Removed text chevrons and added rotation styles. Syntax verified.
+
+
+Three connected admin editors implemented from previously inspected Figma 435:673, 508:783, 525:645. AdminBuildingEditor owns a deep-cloned building draft in one native Modal; AdminFloorsEditor expands floor room tables; AdminRoomEditor edits required name/type/description with 300-character limit. Reusable AdminEditorFields and separate adminEditor.styles.js. Existing edit/building/close icons reused, no additional downloads. Building photo can be removed/restored in draft; no photo upload. Room Save updates only draft; Back/Done preserve it; final building Save commits to dashboard memory; building Cancel/X discard draft, room Cancel/X discard room edit. Floor reductions containing rooms are blocked; extra floors start empty. No add/delete-room feature or persistent backend. Sample floor records generated only for buildings lacking them and retained on Save. Draft isolation/room update/floor protection tests and JSX syntax passed; web export passed (exit 0); visual interaction testing pending.
+
+
+Dashboard table revised to user screenshot: 49px compact rows, 56x35 thumbnails, smaller table text/badges, 36px header, proportional shared header/body columns, search/filter icons and compact toolbar. Neutral border retained because blue reference outline appears to be Figma selection. Existing map-filter.svg now supports currentColor with white default, allowing gray admin filter without changing Map. Search/filter/edit behavior unchanged. Syntax and web export passed; browser visual comparison remains pending.
+
+
+Admin Dashboard implemented from previously inspected Figma 397:639 at /admin-dashboard. Reusable AdminSidebar, AdminSummaryCard and AdminBuildingRow, separate adminDashboard.styles.js, six sample records in data/adminBuildings.js. Search/category filters work locally; summaries compute from actual records (6 total, 3 academic, 1 admin, 2 facilities/others), correcting inconsistent Figma totals. Edit opens a local preview form with name/description/floors/category/status; Cancel discards edits, Save preview updates in-memory data and validates name/positive whole-number floors. No backend persistence. Existing location photos reused. Missing dashboard icons downloaded to assets/admin. Admin login is explicitly marked Prototype preview and routes to dashboard after nonempty fields; this is NOT authentication or access control. Password cleared before navigation, no credentials sent/stored. Logout replaces route with /admin. Sidebar stacks on narrow screens; table can scroll horizontally. 73 source files parse; login route and sample counts verified. Web export passed (1,004 modules, exit 0); browser visual/interaction testing pending.
+
+
+Admin Login UI added from Figma 397:626 at /admin (src/app/admin.jsx reexports screens/adminLoginScreen.jsx). Desktop split branding/form layout stacks below 800px; separate labeled adminLoginScreen.styles.js. Downloaded reference assets to assets/admin. Form has username/password inputs, visibility toggle, required-field validation and explicit not-connected feedback; no authentication, credentials transmission/storage, admin role enforcement or dashboard implemented. Existing welcome route unchanged; open /admin directly. Source syntax passed. Android export passed (1,504 modules, exit 0); desktop/mobile visual validation pending.
+
+
+Room popup artwork revision: user supplied elevenBg.svg (349x386). RoomDetailsModal now uses that single background and existing close.svg without a circle. Removed the six downloaded room-detail-*.svg assets per request, along with duplicate outline/wave markup. Floor remains text. Room details scroll inside the white area for long descriptions. Building selection/dismissal behavior unchanged. Component/style syntax checked; device visual review pending.
+
+
+Room details implemented from Figma 878:731: clickable BuildingRoom passes selected room/floor via BuildingFloor to BuildingSheet. BuildingSheet keeps selectedRoom independently from closing state and renders reusable RoomDetailsModal as a visual overlay within its existing native Modal (avoids stacking native modals). Close/outside tap/Android Back clear selectedRoom only; building and all lists remain mounted, preserving scroll positions. Background building touch/accessibility blocked while room details open. Modal has room name, type, floor, description, no photo; data/buildings.js now provides sample descriptions. Separate labeled roomDetailsModal.styles.js and six exact Figma SVG decorations in assets/icons/room-detail-*.svg. 63 source files parse; downloaded asset root dimensions verified. Android export passed (1,496 modules, exit 0). Device visual alignment, nested scrolling and Back/outside behavior still require verification.
+
+
 Asset rename: user replaced B1.svg with assets/backgrounds/building.svg. Updated BuildingSheet import and style placement comment. Replacement retains 399x721 viewBox; layout unchanged. Import existence and component syntax verified. Earlier B1.svg references below are historical.
 
 
@@ -288,5 +312,9 @@ Environment:
 ## 11. CONTINUATION INSTRUCTION
 
 Read AI_PROGRESS.md first. Inspect the existing project before making changes. Continue from visual verification of the restored example cards and current layouts. Preserve working functionality and user preferences, avoid redoing completed work, and update AI_PROGRESS.md again before ending your session.
+
+
+
+
 
 

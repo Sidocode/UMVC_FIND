@@ -1,12 +1,14 @@
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Room from "../../assets/backgrounds/room.svg";
 import { styles } from "../styles/buildingSheet.styles";
 
-export default function BuildingRoom({ room, fontLoaded }) {
+export default function BuildingRoom({ room, fontLoaded, onSelect }) {
   return (
-    <View
+    <Pressable
       style={styles.room}
       accessible
+      accessibilityRole="button"
+      onPress={() => onSelect(room)}
       accessibilityLabel={`${room.name}, ${room.type}`}
     >
       <Room />
@@ -25,6 +27,6 @@ export default function BuildingRoom({ room, fontLoaded }) {
           {room.type}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 }

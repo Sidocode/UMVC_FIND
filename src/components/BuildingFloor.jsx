@@ -2,7 +2,7 @@ import { FlatList, Text, View } from "react-native";
 import BuildingRoom from "./BuildingRoom";
 import { styles } from "../styles/buildingSheet.styles";
 
-export default function BuildingFloor({ floor, fontLoaded }) {
+export default function BuildingFloor({ floor, fontLoaded, onRoomSelect }) {
   return (
     <View style={styles.floor}>
       {/* Fixed Floor Label — only the room row scrolls sideways */}
@@ -18,7 +18,7 @@ export default function BuildingFloor({ floor, fontLoaded }) {
         data={floor.rooms}
         keyExtractor={(room) => room.id}
         renderItem={({ item }) => (
-          <BuildingRoom room={item} fontLoaded={fontLoaded} />
+          <BuildingRoom room={item} fontLoaded={fontLoaded} onSelect={(room) => onRoomSelect({ ...room, floorNumber: floor.number })} />
         )}
         style={styles.rooms}
         showsHorizontalScrollIndicator={false}
